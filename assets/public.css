@@ -10,13 +10,13 @@
 	box-sizing: border-box;
 	color: var(--parish-bulletins-ink);
 	margin: 0 auto;
-	max-width: 1180px;
+	max-width: 1240px;
 	padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
 }
 
 .parish-bulletins-hero {
 	max-width: 760px;
-	padding-bottom: clamp(2rem, 5vw, 4rem);
+	padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .parish-bulletins-eyebrow {
@@ -45,15 +45,15 @@
 
 .parish-bulletins-grid {
 	display: grid;
-	gap: clamp(1rem, 2.5vw, 2rem);
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+	gap: clamp(1rem, 2vw, 1.5rem);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
 }
 
 .parish-bulletin-card {
 	background: var(--parish-bulletins-paper);
 	border: 1px solid var(--parish-bulletins-rule);
-	border-radius: 14px;
-	box-shadow: 0 8px 28px rgba(31, 36, 40, 0.07);
+	border-radius: 12px;
+	box-shadow: 0 6px 20px rgba(31, 36, 40, 0.06);
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
@@ -62,30 +62,43 @@
 
 .parish-bulletin-card:focus-within,
 .parish-bulletin-card:hover {
-	box-shadow: 0 14px 38px rgba(31, 36, 40, 0.13);
+	box-shadow: 0 12px 30px rgba(31, 36, 40, 0.12);
 	transform: translateY(-3px);
 }
 
 .parish-bulletin-card__primary {
 	color: inherit;
-	display: flex;
+	display: grid;
 	flex: 1;
-	flex-direction: column;
+	grid-template-columns: clamp(88px, 8vw, 108px) minmax(0, 1fr);
 	text-decoration: none;
+}
+
+.parish-bulletin-card__primary:focus-visible,
+.parish-bulletin-actions a:focus-visible {
+	outline: 3px solid var(--parish-bulletins-accent);
+	outline-offset: -3px;
 }
 
 .parish-bulletin-card__image,
 .parish-bulletin-card__document {
-	aspect-ratio: 16 / 10;
+	aspect-ratio: 8.5 / 11;
 	background: #f5eee7;
 	background: linear-gradient(135deg, color-mix(in srgb, var(--parish-bulletins-accent) 12%, white), var(--parish-bulletins-paper));
+	min-height: 142px;
 	overflow: hidden;
 }
 
 .parish-bulletin-card__image img {
 	height: 100%;
 	object-fit: cover;
+	transition: transform 220ms ease;
 	width: 100%;
+}
+
+.parish-bulletin-card:hover .parish-bulletin-card__image img,
+.parish-bulletin-card:focus-within .parish-bulletin-card__image img {
+	transform: scale(1.025);
 }
 
 .parish-bulletin-card__document {
@@ -105,28 +118,34 @@
 }
 
 .parish-bulletin-card__body {
-	padding: 1.5rem 1.5rem 1rem;
+	min-width: 0;
+	padding: 1rem 1rem 0.85rem;
 }
 
 .parish-bulletin-card time,
 .parish-bulletin-single time {
 	color: var(--parish-bulletins-muted);
-	font-size: 0.82rem;
+	font-size: 0.75rem;
 	font-weight: 650;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 }
 
 .parish-bulletin-card h2 {
-	font-size: clamp(1.25rem, 3vw, 1.55rem);
-	line-height: 1.2;
-	margin: 0.55rem 0 0;
+	font-size: 1.08rem;
+	line-height: 1.28;
+	margin: 0.45rem 0 0;
 }
 
 .parish-bulletin-card__excerpt {
+	display: -webkit-box;
+	font-size: 0.88rem;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 	color: var(--parish-bulletins-muted);
-	line-height: 1.55;
-	margin-top: 0.75rem;
+	line-height: 1.45;
+	margin-top: 0.55rem;
+	overflow: hidden;
 }
 
 .parish-bulletin-card__excerpt p {
@@ -138,10 +157,10 @@
 	border-top: 1px solid var(--parish-bulletins-rule);
 	display: flex;
 	flex-wrap: wrap;
-	font-size: 0.9rem;
+	font-size: 0.82rem;
 	font-weight: 700;
-	gap: 1.25rem;
-	padding: 1rem 1.5rem 1.25rem;
+	gap: 1rem;
+	padding: 0.8rem 1rem 0.9rem;
 }
 
 .parish-bulletin-actions a,
@@ -314,8 +333,24 @@
 	}
 }
 
+@media (max-width: 380px) {
+	.parish-bulletin-card__primary {
+		grid-template-columns: 82px minmax(0, 1fr);
+	}
+
+	.parish-bulletin-card__excerpt {
+		display: none;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
-	.parish-bulletin-card {
+	.parish-bulletin-card,
+	.parish-bulletin-card__image img {
 		transition: none;
+	}
+
+	.parish-bulletin-card:hover .parish-bulletin-card__image img,
+	.parish-bulletin-card:focus-within .parish-bulletin-card__image img {
+		transform: none;
 	}
 }

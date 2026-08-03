@@ -19,7 +19,7 @@ function parish_bulletins_archive_order( $query ) {
 		return;
 	}
 
-	$query->set( 'posts_per_page', 12 );
+	$query->set( 'posts_per_page', 16 );
 	$query->set( 'post_status', 'publish' );
 	$query->set( 'meta_key', '_parish_bulletin_date' );
 	$query->set( 'orderby', array( 'meta_value' => 'DESC', 'date' => 'DESC' ) );

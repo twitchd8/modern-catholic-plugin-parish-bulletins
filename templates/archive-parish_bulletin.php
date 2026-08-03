@@ -15,7 +15,7 @@ parish_bulletins_render_page_header();
 	<header class="parish-bulletins-hero">
 		<p class="parish-bulletins-eyebrow"><?php esc_html_e( 'Parish Life', 'parish-bulletins' ); ?></p>
 		<h1><?php post_type_archive_title(); ?></h1>
-		<p><?php esc_html_e( 'Read the latest parish news, schedules, and announcements.', 'parish-bulletins' ); ?></p>
+		<p><?php esc_html_e( 'Browse recent parish news, schedules, and announcements.', 'parish-bulletins' ); ?></p>
 	</header>
 
 	<?php if ( have_posts() ) : ?>
@@ -25,7 +25,7 @@ parish_bulletins_render_page_header();
 				the_post();
 				$pdf           = parish_bulletins_get_pdf( get_the_ID() );
 				$display_title = parish_bulletins_get_display_title( get_the_ID() );
-				$thumbnail     = parish_bulletins_get_thumbnail_html( get_the_ID() );
+				$thumbnail     = parish_bulletins_get_thumbnail_html( get_the_ID(), 'medium' );
 				?>
 				<article <?php post_class( 'parish-bulletin-card' ); ?>>
 					<a class="parish-bulletin-card__primary" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Open %s', 'parish-bulletins' ), $display_title ) ); ?>">

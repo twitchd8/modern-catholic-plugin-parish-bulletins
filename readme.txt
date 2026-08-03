@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -39,6 +39,10 @@ Themes can override the public templates by adding:
 * parish-bulletins/single-parish_bulletin.php
 
 == Changelog ==
+
+= 1.1.0 =
+* Redesign the Bulletin archive as a compact responsive card grid.
+* Use smaller archive thumbnails and show up to 16 Bulletins per page.
 
 = 1.0.0 =
 * Promote the complete PDF-first Bulletin workflow to its first stable release.
