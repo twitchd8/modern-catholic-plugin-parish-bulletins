@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.2.0
 License: GPLv2 or later
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -39,6 +39,15 @@ Themes can override the public templates by adding:
 * parish-bulletins/single-parish_bulletin.php
 
 == Changelog ==
+
+= 0.2.0 =
+* Use the PDF's generated first-page image as the archive thumbnail when no
+  manual featured image is selected.
+* Add an embedded PDF.js viewer with page navigation and zoom controls.
+* Add a date-based visitor title when a Bulletin is published without a title.
+
+The viewer bundles Mozilla PDF.js 6.1.200 under the Apache License 2.0. Its
+license is included at `assets/vendor/pdfjs/LICENSE`.
 
 = 0.1.1 =
 * Clarify Draft and Published visibility in the Bulletin editor.

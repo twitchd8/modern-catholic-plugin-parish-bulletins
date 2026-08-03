@@ -24,7 +24,7 @@
 		}, [] );
 		const pdfId = Number( meta._parish_bulletin_pdf_id || 0 );
 		const pdf = useSelect( function ( select ) {
-			return pdfId ? select( 'core' ).getMedia( pdfId ) : null;
+			return pdfId ? select( 'core' ).getEntityRecord( 'postType', 'attachment', pdfId ) : null;
 		}, [ pdfId ] );
 		const editPost = useDispatch( 'core/editor' ).editPost;
 

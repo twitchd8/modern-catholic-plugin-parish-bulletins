@@ -158,4 +158,67 @@ function parish_bulletins_get_pdf( $post ) {
 	return $pdf;
 }
 
+/**
+ * Gets a visitor-facing title, even when an editor leaves the title empty.
+ *
+ * @param int|WP_Post $post Bulletin post or ID.
+ * @return string
+ */
+function parish_bulletins_get_display_title( $post ) {
+	$post  = get_post( $post );
+	$title = $post ? trim( get_the_title( $post ) ) : '';
+
+	if ( $title ) {
+		return $title;
+	}
+
+	return sprintf(
+		/* translators: %s: formatted bulletin date. */
+		__( '%s Bulletin', 'parish-bulletins' ),
+		parish_bulletins_get_date( $post, get_option( 'date_format' ) )
+	);
+}
+
+/**
+ * Gets the manual featured image or the PDF's generated first-page preview.
+ *
+ * @param int|WP_Post $post Bulletin post or ID.
+ * @param string      $size Registered image size.
+ * @return string Image HTML or an empty string.
+ */
+function parish_bulletins_get_thumbnail_html( $post, $size = 'medium_large' ) {
+	$post = get_post( $post );
+
+	if ( ! $post ) {
+		return '';
+	}
+
+	if ( has_post_thumbnail( $post ) ) {
+		return get_the_post_thumbnail(
+			$post,
+			$size,
+			array( 'class' => 'parish-bulletin-thumbnail' )
+		);
+	}
+
+	$pdf = parish_bulletins_get_pdf( $post );
+	if ( ! $pdf ) {
+		return '';
+	}
+
+	return wp_get_attachment_image(
+		$pdf->ID,
+		$size,
+		false,
+		array(
+			'class' => 'parish-bulletin-thumbnail parish-bulletin-thumbnail--pdf',
+			'alt'   => sprintf(
+				/* translators: %s: bulletin title. */
+				__( 'First page of %s', 'parish-bulletins' ),
+				parish_bulletins_get_display_title( $post )
+			),
+		)
+	);
+}
+
 add_action( 'init', 'parish_bulletins_register_post_type' );

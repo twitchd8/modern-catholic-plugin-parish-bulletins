@@ -195,21 +195,100 @@
 	color: #fff !important;
 }
 
-.parish-bulletin-pdf-preview {
-	background: #e9eaec;
+.parish-bulletin-pdf-viewer {
+	background: #25272a;
 	border: 1px solid var(--parish-bulletins-rule);
 	border-radius: 12px;
 	overflow: hidden;
 }
 
-.parish-bulletin-pdf-preview object {
-	display: block;
-	height: min(82vh, 900px);
-	width: 100%;
+.parish-bulletin-viewer-toolbar {
+	align-items: center;
+	background: #161719;
+	color: #fff;
+	display: flex;
+	flex-wrap: wrap;
+	font-family: system-ui, sans-serif;
+	font-size: 0.875rem;
+	gap: 1rem;
+	justify-content: space-between;
+	padding: 0.65rem 0.8rem;
 }
 
-.parish-bulletin-pdf-preview object p {
+.parish-bulletin-viewer-pages,
+.parish-bulletin-viewer-zoom {
+	align-items: center;
+	display: flex;
+	gap: 0.4rem;
+}
+
+.parish-bulletin-viewer-toolbar button,
+.parish-bulletin-viewer-toolbar input {
+	background: #34373b;
+	border: 1px solid #555a60;
+	border-radius: 5px;
+	box-sizing: border-box;
+	color: #fff;
+	font: inherit;
+	height: 2rem;
+}
+
+.parish-bulletin-viewer-toolbar button {
+	cursor: pointer;
+	min-width: 2rem;
+	padding: 0 0.55rem;
+}
+
+.parish-bulletin-viewer-toolbar button:disabled {
+	cursor: default;
+	opacity: 0.45;
+}
+
+.parish-bulletin-viewer-toolbar input {
+	padding: 0 0.35rem;
+	text-align: center;
+	width: 3.25rem;
+}
+
+.parish-bulletin-viewer-status {
+	color: #fff;
+	font-family: system-ui, sans-serif;
 	padding: 2rem;
+	text-align: center;
+}
+
+.parish-bulletin-viewer-status[hidden] {
+	display: none;
+}
+
+.parish-bulletin-viewer-canvas {
+	align-items: flex-start;
+	display: flex;
+	height: min(82vh, 900px);
+	justify-content: center;
+	overflow: auto;
+	padding: 1rem;
+}
+
+.parish-bulletin-viewer-canvas canvas {
+	background: #fff;
+	box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
+	display: block;
+	max-width: none;
+}
+
+.parish-bulletin-viewer-fallback {
+	background: #161719;
+	color: #d9dcdf;
+	font-family: system-ui, sans-serif;
+	font-size: 0.82rem;
+	margin: 0;
+	padding: 0.7rem 1rem;
+	text-align: center;
+}
+
+.parish-bulletin-viewer-fallback a {
+	color: #fff;
 }
 
 .parish-bulletin-content {
@@ -229,8 +308,9 @@
 		padding-inline: 1rem;
 	}
 
-	.parish-bulletin-pdf-preview {
-		display: none;
+	.parish-bulletin-viewer-canvas {
+		height: 65vh;
+		padding: 0.5rem;
 	}
 }
 

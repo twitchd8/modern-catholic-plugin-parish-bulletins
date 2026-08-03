@@ -63,6 +63,15 @@ function parish_bulletins_enqueue_public_assets() {
 		array(),
 		PARISH_BULLETINS_VERSION
 	);
+
+	if ( is_singular( 'parish_bulletin' ) && parish_bulletins_get_pdf( get_queried_object_id() ) ) {
+		wp_enqueue_script_module(
+			'parish-bulletins-viewer',
+			PARISH_BULLETINS_URL . 'assets/viewer.mjs',
+			array(),
+			PARISH_BULLETINS_VERSION
+		);
+	}
 }
 
 /**
