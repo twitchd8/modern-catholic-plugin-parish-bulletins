@@ -1,0 +1,241 @@
+:root {
+	--parish-bulletins-accent: var(--wp--preset--color--contrast-2, #8b1e2d);
+	--parish-bulletins-ink: var(--wp--preset--color--contrast, #1f2428);
+	--parish-bulletins-paper: var(--wp--preset--color--base, #fffdf8);
+	--parish-bulletins-muted: #656b70;
+	--parish-bulletins-rule: rgba(31, 36, 40, 0.14);
+}
+
+.parish-bulletins-shell {
+	box-sizing: border-box;
+	color: var(--parish-bulletins-ink);
+	margin: 0 auto;
+	max-width: 1180px;
+	padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.parish-bulletins-hero {
+	max-width: 760px;
+	padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.parish-bulletins-eyebrow {
+	color: var(--parish-bulletins-accent);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	margin: 0 0 0.75rem;
+	text-transform: uppercase;
+}
+
+.parish-bulletins-hero h1,
+.parish-bulletin-single__header h1 {
+	font-size: clamp(2.4rem, 6vw, 4.75rem);
+	letter-spacing: -0.035em;
+	line-height: 1.03;
+	margin: 0 0 1rem;
+}
+
+.parish-bulletins-hero > p:last-child,
+.parish-bulletin-single__summary {
+	color: var(--parish-bulletins-muted);
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	line-height: 1.6;
+}
+
+.parish-bulletins-grid {
+	display: grid;
+	gap: clamp(1rem, 2.5vw, 2rem);
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.parish-bulletin-card {
+	background: var(--parish-bulletins-paper);
+	border: 1px solid var(--parish-bulletins-rule);
+	border-radius: 14px;
+	box-shadow: 0 8px 28px rgba(31, 36, 40, 0.07);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.parish-bulletin-card:focus-within,
+.parish-bulletin-card:hover {
+	box-shadow: 0 14px 38px rgba(31, 36, 40, 0.13);
+	transform: translateY(-3px);
+}
+
+.parish-bulletin-card__primary {
+	color: inherit;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	text-decoration: none;
+}
+
+.parish-bulletin-card__image,
+.parish-bulletin-card__document {
+	aspect-ratio: 16 / 10;
+	background: #f5eee7;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--parish-bulletins-accent) 12%, white), var(--parish-bulletins-paper));
+	overflow: hidden;
+}
+
+.parish-bulletin-card__image img {
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.parish-bulletin-card__document {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.parish-bulletin-card__document span {
+	border: 2px solid currentColor;
+	border-radius: 4px;
+	color: var(--parish-bulletins-accent);
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	padding: 1rem 0.75rem;
+}
+
+.parish-bulletin-card__body {
+	padding: 1.5rem 1.5rem 1rem;
+}
+
+.parish-bulletin-card time,
+.parish-bulletin-single time {
+	color: var(--parish-bulletins-muted);
+	font-size: 0.82rem;
+	font-weight: 650;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.parish-bulletin-card h2 {
+	font-size: clamp(1.25rem, 3vw, 1.55rem);
+	line-height: 1.2;
+	margin: 0.55rem 0 0;
+}
+
+.parish-bulletin-card__excerpt {
+	color: var(--parish-bulletins-muted);
+	line-height: 1.55;
+	margin-top: 0.75rem;
+}
+
+.parish-bulletin-card__excerpt p {
+	margin: 0;
+}
+
+.parish-bulletin-actions {
+	align-items: center;
+	border-top: 1px solid var(--parish-bulletins-rule);
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 0.9rem;
+	font-weight: 700;
+	gap: 1.25rem;
+	padding: 1rem 1.5rem 1.25rem;
+}
+
+.parish-bulletin-actions a,
+.parish-bulletin-back a {
+	color: var(--parish-bulletins-accent);
+	text-underline-offset: 0.2em;
+}
+
+.parish-bulletins-pagination {
+	margin-top: 3rem;
+}
+
+.parish-bulletins-empty {
+	background: var(--parish-bulletins-paper);
+	border: 1px solid var(--parish-bulletins-rule);
+	border-radius: 12px;
+	padding: 2rem;
+}
+
+.parish-bulletin-back {
+	margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.parish-bulletin-single {
+	max-width: 1000px;
+}
+
+.parish-bulletin-single__header {
+	max-width: 800px;
+}
+
+.parish-bulletin-single__summary p {
+	margin-bottom: 0;
+}
+
+.parish-bulletin-actions--single {
+	border: 0;
+	gap: 0.75rem;
+	padding: 2rem 0;
+}
+
+.parish-bulletin-button {
+	border: 1px solid var(--parish-bulletins-accent);
+	border-radius: 999px;
+	padding: 0.75rem 1.2rem;
+	text-decoration: none;
+}
+
+.parish-bulletin-button--primary {
+	background: var(--parish-bulletins-accent);
+	color: #fff !important;
+}
+
+.parish-bulletin-pdf-preview {
+	background: #e9eaec;
+	border: 1px solid var(--parish-bulletins-rule);
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.parish-bulletin-pdf-preview object {
+	display: block;
+	height: min(82vh, 900px);
+	width: 100%;
+}
+
+.parish-bulletin-pdf-preview object p {
+	padding: 2rem;
+}
+
+.parish-bulletin-content {
+	border-top: 1px solid var(--parish-bulletins-rule);
+	font-size: 1.05rem;
+	line-height: 1.7;
+	margin-top: clamp(3rem, 7vw, 6rem);
+	padding-top: clamp(2rem, 5vw, 4rem);
+}
+
+.parish-bulletin-content > h2 {
+	font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+@media (max-width: 600px) {
+	.parish-bulletins-shell {
+		padding-inline: 1rem;
+	}
+
+	.parish-bulletin-pdf-preview {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.parish-bulletin-card {
+		transition: none;
+	}
+}

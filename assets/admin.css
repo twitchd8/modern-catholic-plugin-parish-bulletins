@@ -1,0 +1,29 @@
+.parish-bulletin-fields {
+	max-width: 760px;
+}
+
+.parish-bulletin-intro {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+.parish-bulletin-fields input[type="date"] {
+	min-width: 220px;
+}
+
+.parish-bulletin-pdf-field {
+	border-top: 1px solid #dcdcde;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+.parish-bulletin-file-name {
+	background: #f6f7f7;
+	border-left: 4px solid #2271b1;
+	margin: 10px 0;
+	padding: 10px 12px;
+}
+
+#parish-bulletin-remove-pdf {
+	margin-left: 8px;
+}
