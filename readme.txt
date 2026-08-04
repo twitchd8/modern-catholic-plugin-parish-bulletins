@@ -2,8 +2,9 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.2
-License: GPLv2 or later
+Stable tag: 1.3.0
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
 full e-bulletin content.
@@ -38,7 +39,23 @@ Themes can override the public templates by adding:
 * parish-bulletins/archive-parish_bulletin.php
 * parish-bulletins/single-parish_bulletin.php
 
+== Warranty ==
+
+Parish Bulletins is provided "as is," without warranty of any kind. To the
+extent permitted by applicable law, the authors and copyright holders are not
+liable for damages arising from its use or inability to use it. See Sections
+15 and 16 of the GNU General Public License version 3 for the complete warranty
+disclaimer and limitation of liability.
+
+Third-party components retain their original licenses. See
+`THIRD-PARTY-NOTICES.md` and the license files stored with those components.
+
 == Changelog ==
+
+= 1.3.0 =
+* License Parish Bulletins under GPL version 3 or later.
+* Add the complete GPLv3 license, an explicit warranty disclaimer, and
+  third-party notices for PDF.js and its bundled standard fonts.
 
 = 1.2.2 =
 * Prepare the current Bulletin archive, PDF viewer, and comment-disabled

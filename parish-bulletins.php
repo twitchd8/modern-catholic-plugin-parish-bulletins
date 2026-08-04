@@ -2,9 +2,10 @@
 /**
  * Plugin Name: Parish Bulletins
  * Description: Publishes dated parish bulletin PDFs with a future-ready home for e-bulletin content.
- * Version: 1.2.2
+ * Version: 1.3.0
  * Author: Andrew T. Schmitt
- * License: GPL-2.0-or-later
+ * License: GPL-3.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: parish-bulletins
  */
 
@@ -12,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PARISH_BULLETINS_VERSION', '1.2.2' );
+define( 'PARISH_BULLETINS_VERSION', '1.3.0' );
 define( 'PARISH_BULLETINS_FILE', __FILE__ );
 define( 'PARISH_BULLETINS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PARISH_BULLETINS_URL', plugin_dir_url( __FILE__ ) );
