@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -39,6 +39,10 @@ Themes can override the public templates by adding:
 * parish-bulletins/single-parish_bulletin.php
 
 == Changelog ==
+
+= 1.2.1 =
+* Keep comments and pingbacks closed for every Bulletin, including existing
+  records and requests made through WordPress APIs.
 
 = 1.2.0 =
 * Generate each post title from its Bulletin Date, such as

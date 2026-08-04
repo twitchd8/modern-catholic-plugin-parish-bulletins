@@ -104,6 +104,47 @@ function parish_bulletins_register_post_type() {
 }
 
 /**
+ * Keeps discussion closed whenever a Bulletin is created or updated.
+ *
+ * This protects Bulletins even if the site's default discussion setting is
+ * changed or a client submits post data through the REST API.
+ *
+ * @param array $data    Sanitized post data.
+ * @param array $postarr Raw post data.
+ * @return array
+ */
+function parish_bulletins_close_saved_discussion( $data, $postarr ) {
+	if ( isset( $data['post_type'] ) && 'parish_bulletin' === $data['post_type'] ) {
+		$data['comment_status'] = 'closed';
+		$data['ping_status']    = 'closed';
+	}
+
+	return $data;
+}
+
+/**
+ * Prevents comments or pingbacks from being opened for a Bulletin.
+ *
+ * @param bool $open    Whether discussion is currently open.
+ * @param int  $post_id Post ID.
+ * @return bool
+ */
+function parish_bulletins_discussion_open( $open, $post_id ) {
+	return 'parish_bulletin' === get_post_type( $post_id ) ? false : $open;
+}
+
+/**
+ * Hides any legacy comments that may have been associated with a Bulletin.
+ *
+ * @param WP_Comment[] $comments Comments for the current post.
+ * @param int          $post_id  Post ID.
+ * @return WP_Comment[]
+ */
+function parish_bulletins_hide_comments( $comments, $post_id ) {
+	return 'parish_bulletin' === get_post_type( $post_id ) ? array() : $comments;
+}
+
+/**
  * Accepts only real calendar dates in WordPress's storage format.
  *
  * @param mixed $value Candidate date.
@@ -297,6 +338,10 @@ function parish_bulletins_get_thumbnail_html( $post, $size = 'medium_large' ) {
 }
 
 add_action( 'init', 'parish_bulletins_register_post_type' );
+add_filter( 'wp_insert_post_data', 'parish_bulletins_close_saved_discussion', 10, 2 );
+add_filter( 'comments_open', 'parish_bulletins_discussion_open', 10, 2 );
+add_filter( 'pings_open', 'parish_bulletins_discussion_open', 10, 2 );
+add_filter( 'comments_array', 'parish_bulletins_hide_comments', 10, 2 );
 add_action( 'save_post_parish_bulletin', 'parish_bulletins_sync_title', 30 );
 add_action( 'added_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );
 add_action( 'updated_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );
