@@ -117,6 +117,70 @@ function parish_bulletins_sanitize_date( $value ) {
 }
 
 /**
+ * Builds the canonical Bulletin title from a stored Bulletin Date.
+ *
+ * @param mixed $value Candidate date in Y-m-d format.
+ * @return string Generated title or an empty string for an invalid date.
+ */
+function parish_bulletins_get_title_from_date( $value ) {
+	$value = parish_bulletins_sanitize_date( $value );
+	if ( ! $value ) {
+		return '';
+	}
+
+	$timezone = wp_timezone();
+	$date     = DateTimeImmutable::createFromFormat( '!Y-m-d', $value, $timezone );
+
+	return sprintf(
+		/* translators: %s: Bulletin date such as July 5th, 2026. */
+		__( 'Bulletin - %s', 'parish-bulletins' ),
+		wp_date( 'F jS, Y', $date->getTimestamp(), $timezone )
+	);
+}
+
+/**
+ * Keeps the stored post title synchronized with the Bulletin Date.
+ *
+ * @param int $post_id Bulletin post ID.
+ */
+function parish_bulletins_sync_title( $post_id ) {
+	if ( wp_is_post_revision( $post_id ) || 'parish_bulletin' !== get_post_type( $post_id ) ) {
+		return;
+	}
+
+	$title = parish_bulletins_get_title_from_date(
+		get_post_meta( $post_id, '_parish_bulletin_date', true )
+	);
+
+	if ( ! $title || $title === get_post_field( 'post_title', $post_id ) ) {
+		return;
+	}
+
+	wp_update_post(
+		array(
+			'ID'         => $post_id,
+			'post_title' => $title,
+		)
+	);
+}
+
+/**
+ * Synchronizes the title as soon as the Bulletin Date metadata changes.
+ *
+ * @param int    $meta_id    Metadata row ID.
+ * @param int    $post_id    Bulletin post ID.
+ * @param string $meta_key   Metadata key.
+ * @param mixed  $meta_value New metadata value.
+ */
+function parish_bulletins_sync_title_after_date_change( $meta_id, $post_id, $meta_key, $meta_value ) {
+	if ( '_parish_bulletin_date' !== $meta_key ) {
+		return;
+	}
+
+	parish_bulletins_sync_title( $post_id );
+}
+
+/**
  * Gets a bulletin's stored date, falling back to its publication date.
  *
  * @param int|WP_Post $post Bulletin post or ID.
@@ -168,14 +232,25 @@ function parish_bulletins_get_display_title( $post ) {
 	$post  = get_post( $post );
 	$title = $post ? trim( get_the_title( $post ) ) : '';
 
+	if ( ! $post ) {
+		return '';
+	}
+
+	if ( $title ) {
+		return $title;
+	}
+
+	$date  = get_post_meta( $post->ID, '_parish_bulletin_date', true );
+	$title = parish_bulletins_get_title_from_date( $date );
+
 	if ( $title ) {
 		return $title;
 	}
 
 	return sprintf(
-		/* translators: %s: formatted bulletin date. */
-		__( '%s Bulletin', 'parish-bulletins' ),
-		parish_bulletins_get_date( $post, get_option( 'date_format' ) )
+		/* translators: %s: formatted Bulletin date. */
+		__( 'Bulletin - %s', 'parish-bulletins' ),
+		parish_bulletins_get_date( $post, 'F jS, Y' )
 	);
 }
 
@@ -222,3 +297,6 @@ function parish_bulletins_get_thumbnail_html( $post, $size = 'medium_large' ) {
 }
 
 add_action( 'init', 'parish_bulletins_register_post_type' );
+add_action( 'save_post_parish_bulletin', 'parish_bulletins_sync_title', 30 );
+add_action( 'added_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );
+add_action( 'updated_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );

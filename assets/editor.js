@@ -12,6 +12,44 @@
 	const MediaUploadCheck = wp.blockEditor.MediaUploadCheck;
 	const __ = wp.i18n.__;
 
+	function ordinalSuffix( day ) {
+		const remainder = day % 100;
+
+		if ( remainder >= 11 && remainder <= 13 ) {
+			return 'th';
+		}
+
+		switch ( day % 10 ) {
+			case 1:
+				return 'st';
+			case 2:
+				return 'nd';
+			case 3:
+				return 'rd';
+			default:
+				return 'th';
+		}
+	}
+
+	function titleFromDate( value ) {
+		const parts = value.split( '-' ).map( Number );
+		if ( parts.length !== 3 || ! parts[ 0 ] || ! parts[ 1 ] || ! parts[ 2 ] ) {
+			return '';
+		}
+
+		const date = new Date( Date.UTC( parts[ 0 ], parts[ 1 ] - 1, parts[ 2 ] ) );
+		if (
+			date.getUTCFullYear() !== parts[ 0 ] ||
+			date.getUTCMonth() !== parts[ 1 ] - 1 ||
+			date.getUTCDate() !== parts[ 2 ]
+		) {
+			return '';
+		}
+
+		const month = new Intl.DateTimeFormat( undefined, { month: 'long', timeZone: 'UTC' } ).format( date );
+		return __( 'Bulletin - ', 'parish-bulletins' ) + month + ' ' + parts[ 2 ] + ordinalSuffix( parts[ 2 ] ) + ', ' + parts[ 0 ];
+	}
+
 	function BulletinDetailsPanel() {
 		const postType = useSelect( function ( select ) {
 			return select( 'core/editor' ).getCurrentPostType();
@@ -51,7 +89,14 @@
 				type: 'date',
 				value: meta._parish_bulletin_date || '',
 				onChange: function ( value ) {
-					updateMeta( '_parish_bulletin_date', value );
+					const changes = {
+						meta: Object.assign( {}, meta, { _parish_bulletin_date: value } ),
+					};
+					const generatedTitle = titleFromDate( value );
+					if ( generatedTitle ) {
+						changes.title = generatedTitle;
+					}
+					editPost( changes );
 				},
 				__nextHasNoMarginBottom: true,
 				__next40pxDefaultSize: true,

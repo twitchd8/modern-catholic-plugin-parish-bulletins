@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -39,6 +39,10 @@ Themes can override the public templates by adding:
 * parish-bulletins/single-parish_bulletin.php
 
 == Changelog ==
+
+= 1.2.0 =
+* Generate each post title from its Bulletin Date, such as
+  `Bulletin - July 5th, 2026`.
 
 = 1.1.0 =
 * Redesign the Bulletin archive as a compact responsive card grid.
