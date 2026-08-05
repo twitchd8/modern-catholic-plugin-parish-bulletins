@@ -63,6 +63,11 @@ parish_bulletins_render_page_header();
 			<p><?php esc_html_e( 'Please check back soon.', 'parish-bulletins' ); ?></p>
 		</div>
 	<?php endif; ?>
+
+	<section class="parish-bulletins-retention" aria-labelledby="parish-bulletins-retention-heading">
+		<h2 id="parish-bulletins-retention-heading"><?php esc_html_e( 'Looking for an older bulletin?', 'parish-bulletins' ); ?></h2>
+		<p><?php esc_html_e( 'Online bulletins are available for the most recent 12 months. Please contact the parish office for earlier bulletins.', 'parish-bulletins' ); ?></p>
+	</section>
 </main>
 
 <?php parish_bulletins_render_page_footer(); ?>

@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,12 @@ Parish Bulletins adds Dashboard > Bulletins with a focused publishing workflow:
 Published bulletins appear at /bulletins/, newest bulletin date first. Each
 bulletin has View PDF and Download PDF actions plus an in-page PDF preview on
 larger screens.
+
+The public archive keeps a rolling 12 months of Bulletins. A daily WordPress
+cron task permanently removes older Bulletin records and deletes their PDF
+attachments and generated previews when those media files are not used by
+other content. Visitors are directed to the parish office for earlier
+Bulletins.
 
 The plugin stores bulletins as normal WordPress posts with the
 `parish_bulletin` post type. The date and PDF attachment ID are post metadata;
@@ -51,6 +57,13 @@ Third-party components retain their original licenses. See
 `THIRD-PARTY-NOTICES.md` and the license files stored with those components.
 
 == Changelog ==
+
+= 1.4.0 =
+* Keep a rolling 12 months of Bulletins on the public archive.
+* Run a daily cleanup that permanently removes older Bulletin records and
+  deletes unshared PDF attachments and their generated preview files.
+* Preserve PDF media that is still referenced elsewhere on the site.
+* Direct visitors to the parish office for Bulletins older than 12 months.
 
 = 1.3.0 =
 * License Parish Bulletins under GPL version 3 or later.

@@ -24,6 +24,17 @@ function parish_bulletins_archive_order( $query ) {
 	$query->set( 'meta_key', '_parish_bulletin_date' );
 	$query->set( 'orderby', array( 'meta_value' => 'DESC', 'date' => 'DESC' ) );
 	$query->set( 'meta_type', 'DATE' );
+	$query->set(
+		'meta_query',
+		array(
+			array(
+				'key'     => '_parish_bulletin_date',
+				'value'   => parish_bulletins_get_retention_cutoff(),
+				'compare' => '>=',
+				'type'    => 'DATE',
+			),
+		)
+	);
 }
 
 /**
