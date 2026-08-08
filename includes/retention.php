@@ -9,18 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PARISH_BULLETINS_RETENTION_MONTHS', 12 );
 define( 'PARISH_BULLETINS_RETENTION_HOOK', 'parish_bulletins_run_retention' );
 define( 'PARISH_BULLETINS_RETENTION_BATCH_SIZE', 100 );
 
 /**
  * Gets the oldest Bulletin date that remains available online.
  *
- * @return string Date in Y-m-d format.
+ * @return string|false Date in Y-m-d format, or false when all Bulletins are kept.
  */
 function parish_bulletins_get_retention_cutoff() {
+	$months = parish_bulletins_get_retention_months();
+	if ( ! $months ) {
+		return false;
+	}
+
 	return current_datetime()
-		->modify( '-' . PARISH_BULLETINS_RETENTION_MONTHS . ' months' )
+		->modify( '-' . $months . ' months' )
 		->format( 'Y-m-d' );
 }
 
@@ -28,6 +32,13 @@ function parish_bulletins_get_retention_cutoff() {
  * Schedules the daily cleanup without creating duplicate cron events.
  */
 function parish_bulletins_schedule_retention() {
+	if ( ! parish_bulletins_get_retention_months() ) {
+		if ( wp_next_scheduled( PARISH_BULLETINS_RETENTION_HOOK ) ) {
+			parish_bulletins_clear_retention_schedule();
+		}
+		return;
+	}
+
 	if ( wp_next_scheduled( PARISH_BULLETINS_RETENTION_HOOK ) ) {
 		return;
 	}
@@ -148,6 +159,10 @@ function parish_bulletins_apply_retention() {
 		'failed'         => 0,
 	);
 
+	if ( ! $cutoff ) {
+		return $result;
+	}
+
 	if ( get_transient( 'parish_bulletins_retention_lock' ) ) {
 		return $result;
 	}
@@ -217,19 +232,38 @@ function parish_bulletins_apply_retention() {
  */
 function parish_bulletins_retention_admin_notice() {
 	$screen = get_current_screen();
-	if ( ! $screen || 'parish_bulletin' !== $screen->post_type ) {
+	if ( ! $screen || 'parish_bulletin' !== $screen->post_type || 'parish_bulletin_page_parish-bulletins-settings' === $screen->id ) {
 		return;
 	}
 
+	$months   = parish_bulletins_get_retention_months();
 	$last_run = get_option( 'parish_bulletins_last_retention_run', array() );
 	$class    = ! empty( $last_run['failed'] ) ? 'notice notice-warning' : 'notice notice-info';
 	?>
 	<div class="<?php echo esc_attr( $class ); ?>">
 		<p>
-			<strong><?php esc_html_e( 'Rolling 12-month retention is active.', 'parish-bulletins' ); ?></strong>
-			<?php esc_html_e( 'Bulletins older than 12 months are permanently removed during daily cleanup. Unshared PDF files and their generated previews are deleted; media still used elsewhere is preserved.', 'parish-bulletins' ); ?>
+			<?php if ( $months ) : ?>
+				<strong>
+					<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %d: number of months. */
+								__( 'Rolling %d-month retention is active.', 'parish-bulletins' ),
+								$months
+						)
+					);
+					?>
+				</strong>
+				<?php esc_html_e( 'Older Bulletins are permanently removed during daily cleanup. Unshared PDF files and their generated previews are deleted; media still used elsewhere is preserved.', 'parish-bulletins' ); ?>
+			<?php else : ?>
+				<strong><?php esc_html_e( 'All Bulletins are being kept.', 'parish-bulletins' ); ?></strong>
+				<?php esc_html_e( 'Automatic retention cleanup is disabled.', 'parish-bulletins' ); ?>
+			<?php endif; ?>
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=parish_bulletin&page=parish-bulletins-settings' ) ); ?>"><?php esc_html_e( 'Change settings', 'parish-bulletins' ); ?></a>
+			<?php endif; ?>
 		</p>
-		<?php if ( ! empty( $last_run['run_at'] ) ) : ?>
+		<?php if ( $months && ! empty( $last_run['run_at'] ) ) : ?>
 			<p>
 				<?php
 				echo esc_html(

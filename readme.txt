@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -23,11 +23,12 @@ Published bulletins appear at /bulletins/, newest bulletin date first. Each
 bulletin has View PDF and Download PDF actions plus an in-page PDF preview on
 larger screens.
 
-The public archive keeps a rolling 12 months of Bulletins. A daily WordPress
-cron task permanently removes older Bulletin records and deletes their PDF
-attachments and generated previews when those media files are not used by
-other content. Visitors are directed to the parish office for earlier
-Bulletins.
+The plugin keeps all Bulletins by default. Administrators can optionally enter
+a rolling number of months from Bulletins > Settings. When a month limit is
+active, a daily WordPress cron task permanently removes older Bulletin records
+and deletes their PDF attachments and generated previews when those media files
+are not used by other content. Visitors are directed to the parish office for
+earlier Bulletins.
 
 The plugin stores bulletins as normal WordPress posts with the
 `parish_bulletin` post type. The date and PDF attachment ID are post metadata;
@@ -57,6 +58,13 @@ Third-party components retain their original licenses. See
 `THIRD-PARTY-NOTICES.md` and the license files stored with those components.
 
 == Changelog ==
+
+= 1.5.0 =
+* Add a Bulletins > Settings screen for the retention policy.
+* Let administrators choose any retention period from 1 to 1200 months.
+* Keep all Bulletins by default, with no automatic deletion enabled.
+* Add a Keep all Bulletins option that disables archive filtering and cleanup.
+* Update public and administrator retention messages to reflect the setting.
 
 = 1.4.0 =
 * Keep a rolling 12 months of Bulletins on the public archive.
