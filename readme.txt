@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,7 +24,8 @@ bulletin has View PDF and Download PDF actions plus an in-page PDF preview on
 larger screens.
 
 The plugin stores bulletins as normal WordPress posts with the
-`parish_bulletin` post type. The date and PDF attachment ID are post metadata;
+`mc_bulletin` post type. Existing `parish_bulletin` records are migrated
+automatically. The date and PDF attachment ID are post metadata;
 e-bulletin content can grow naturally in the existing post content.
 
 == Installation ==
@@ -36,8 +37,8 @@ e-bulletin content can grow naturally in the existing post content.
 
 Themes can override the public templates by adding:
 
-* parish-bulletins/archive-parish_bulletin.php
-* parish-bulletins/single-parish_bulletin.php
+* parish-bulletins/archive-mc_bulletin.php
+* parish-bulletins/single-mc_bulletin.php
 
 == Warranty ==
 
@@ -51,6 +52,9 @@ Third-party components retain their original licenses. See
 `THIRD-PARTY-NOTICES.md` and the license files stored with those components.
 
 == Changelog ==
+
+= 1.3.1 =
+* Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
 
 = 1.3.0 =
 * License Parish Bulletins under GPL version 3.
