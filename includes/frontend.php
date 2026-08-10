@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param WP_Query $query Current query.
  */
 function parish_bulletins_archive_order( $query ) {
-	if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'parish_bulletin' ) ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'mc_bulletin' ) ) {
 		return;
 	}
 
@@ -43,21 +43,31 @@ function parish_bulletins_archive_order( $query ) {
 /**
  * Uses the plugin's presentation unless a child theme deliberately overrides it.
  *
- * Themes can provide parish-bulletins/archive-parish_bulletin.php and
- * parish-bulletins/single-parish_bulletin.php to own the final presentation.
+ * Themes can provide parish-bulletins/archive-mc_bulletin.php and
+ * parish-bulletins/single-mc_bulletin.php to own the final presentation.
  *
  * @param string $template Resolved template path.
  * @return string
  */
 function parish_bulletins_template_include( $template ) {
-	if ( is_post_type_archive( 'parish_bulletin' ) ) {
-		$override = locate_template( 'parish-bulletins/archive-parish_bulletin.php' );
-		return $override ? $override : PARISH_BULLETINS_DIR . 'templates/archive-parish_bulletin.php';
+	if ( is_post_type_archive( 'mc_bulletin' ) ) {
+		$override = locate_template(
+			array(
+				'parish-bulletins/archive-mc_bulletin.php',
+				'parish-bulletins/archive-parish_bulletin.php',
+			)
+		);
+		return $override ? $override : PARISH_BULLETINS_DIR . 'templates/archive-mc_bulletin.php';
 	}
 
-	if ( is_singular( 'parish_bulletin' ) ) {
-		$override = locate_template( 'parish-bulletins/single-parish_bulletin.php' );
-		return $override ? $override : PARISH_BULLETINS_DIR . 'templates/single-parish_bulletin.php';
+	if ( is_singular( 'mc_bulletin' ) ) {
+		$override = locate_template(
+			array(
+				'parish-bulletins/single-mc_bulletin.php',
+				'parish-bulletins/single-parish_bulletin.php',
+			)
+		);
+		return $override ? $override : PARISH_BULLETINS_DIR . 'templates/single-mc_bulletin.php';
 	}
 
 	return $template;
@@ -67,7 +77,7 @@ function parish_bulletins_template_include( $template ) {
  * Loads styles only on Bulletin views.
  */
 function parish_bulletins_enqueue_public_assets() {
-	if ( ! is_post_type_archive( 'parish_bulletin' ) && ! is_singular( 'parish_bulletin' ) ) {
+	if ( ! is_post_type_archive( 'mc_bulletin' ) && ! is_singular( 'mc_bulletin' ) ) {
 		return;
 	}
 
@@ -78,7 +88,7 @@ function parish_bulletins_enqueue_public_assets() {
 		PARISH_BULLETINS_VERSION
 	);
 
-	if ( is_singular( 'parish_bulletin' ) && parish_bulletins_get_pdf( get_queried_object_id() ) ) {
+	if ( is_singular( 'mc_bulletin' ) && parish_bulletins_get_pdf( get_queried_object_id() ) ) {
 		wp_enqueue_script_module(
 			'parish-bulletins-viewer',
 			PARISH_BULLETINS_URL . 'assets/viewer.mjs',

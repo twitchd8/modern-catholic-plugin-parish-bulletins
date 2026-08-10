@@ -84,7 +84,7 @@ function parish_bulletins_register_settings() {
  */
 function parish_bulletins_add_settings_page() {
 	add_submenu_page(
-		'edit.php?post_type=parish_bulletin',
+		'edit.php?post_type=mc_bulletin',
 		__( 'Bulletin Settings', 'parish-bulletins' ),
 		__( 'Settings', 'parish-bulletins' ),
 		'manage_options',

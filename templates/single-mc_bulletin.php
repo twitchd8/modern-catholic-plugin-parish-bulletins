@@ -18,7 +18,7 @@ parish_bulletins_render_page_header();
 
 <main id="primary" class="parish-bulletins-shell parish-bulletin-single">
 	<nav class="parish-bulletin-back" aria-label="<?php esc_attr_e( 'Bulletin navigation', 'parish-bulletins' ); ?>">
-		<a href="<?php echo esc_url( get_post_type_archive_link( 'parish_bulletin' ) ); ?>">&larr; <?php esc_html_e( 'All bulletins', 'parish-bulletins' ); ?></a>
+		<a href="<?php echo esc_url( get_post_type_archive_link( 'mc_bulletin' ) ); ?>">&larr; <?php esc_html_e( 'All bulletins', 'parish-bulletins' ); ?></a>
 	</nav>
 
 	<article <?php post_class(); ?>>

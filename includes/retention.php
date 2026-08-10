@@ -81,7 +81,7 @@ function parish_bulletins_pdf_is_shared( $pdf_id, $bulletin_id ) {
 
 	$other_bulletins = get_posts(
 		array(
-			'post_type'      => 'parish_bulletin',
+			'post_type'      => 'mc_bulletin',
 			'post_status'    => array( 'publish', 'private', 'draft', 'pending', 'future', 'trash' ),
 			'post__not_in'   => array( $bulletin_id ),
 			'fields'         => 'ids',
@@ -172,7 +172,7 @@ function parish_bulletins_apply_retention() {
 	try {
 		$expired = get_posts(
 			array(
-				'post_type'      => 'parish_bulletin',
+				'post_type'      => 'mc_bulletin',
 				'post_status'    => array( 'publish', 'private', 'draft', 'pending', 'future', 'trash' ),
 				'fields'         => 'ids',
 				'posts_per_page' => PARISH_BULLETINS_RETENTION_BATCH_SIZE,
@@ -232,7 +232,7 @@ function parish_bulletins_apply_retention() {
  */
 function parish_bulletins_retention_admin_notice() {
 	$screen = get_current_screen();
-	if ( ! $screen || 'parish_bulletin' !== $screen->post_type || 'parish_bulletin_page_parish-bulletins-settings' === $screen->id ) {
+	if ( ! $screen || 'mc_bulletin' !== $screen->post_type || 'parish_bulletin_page_parish-bulletins-settings' === $screen->id ) {
 		return;
 	}
 
@@ -260,7 +260,7 @@ function parish_bulletins_retention_admin_notice() {
 				<?php esc_html_e( 'Automatic retention cleanup is disabled.', 'parish-bulletins' ); ?>
 			<?php endif; ?>
 			<?php if ( current_user_can( 'manage_options' ) ) : ?>
-				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=parish_bulletin&page=parish-bulletins-settings' ) ); ?>"><?php esc_html_e( 'Change settings', 'parish-bulletins' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=mc_bulletin&page=parish-bulletins-settings' ) ); ?>"><?php esc_html_e( 'Change settings', 'parish-bulletins' ); ?></a>
 			<?php endif; ?>
 		</p>
 		<?php if ( $months && ! empty( $last_run['run_at'] ) ) : ?>
