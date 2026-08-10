@@ -1,10 +1,11 @@
 <?php
 /**
- * Plugin Name: Parish Bulletins
- * Description: Publishes dated parish bulletin PDFs with a future-ready home for e-bulletin content.
+ * Plugin Name: Modern Catholic – Parish Bulletins
+ * Plugin URI: https://github.com/twitchd8/modern-catholic-plugin-parish-bulletins
+ * Description: Publishes dated parish bulletin PDFs for Modern Catholic parish websites with a future-ready home for e-bulletin content.
  * Version: 1.5.0
  * Author: Andrew T. Schmitt
- * License: GPL-3.0-or-later
+ * License: GPL-3.0-only
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: parish-bulletins
  */
