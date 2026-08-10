@@ -1,6 +1,6 @@
 # Parish Bulletins Development Workflow
 
-This directory is both the active LocalWP plugin and the single local Git repository for `twitchd8/parish-bulletins`.
+This directory is both the active LocalWP plugin and the single local Git repository for `twitchd8/modern-catholic-plugin-parish-bulletins`.
 
 ## Repository Roles
 
