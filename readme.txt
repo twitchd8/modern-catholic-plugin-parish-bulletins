@@ -1,9 +1,9 @@
-=== Parish Bulletins ===
+=== Modern Catholic – Parish Bulletins ===
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
 Stable tag: 1.3.0
-License: GPLv3 or later
+License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -11,7 +11,7 @@ full e-bulletin content.
 
 == Description ==
 
-Parish Bulletins adds Dashboard > Bulletins with a focused publishing workflow:
+Modern Catholic – Parish Bulletins adds Dashboard > Bulletins with a focused publishing workflow:
 
 * Bulletin title
 * Bulletin date
@@ -53,7 +53,7 @@ Third-party components retain their original licenses. See
 == Changelog ==
 
 = 1.3.0 =
-* License Parish Bulletins under GPL version 3 or later.
+* License Parish Bulletins under GPL version 3.
 * Add the complete GPLv3 license, an explicit warranty disclaimer, and
   third-party notices for PDF.js and its bundled standard fonts.
 
