@@ -1,9 +1,9 @@
-=== Parish Bulletins ===
+=== Modern Catholic – Parish Bulletins ===
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.0
-License: GPLv3 or later
+Stable tag: 1.3.1
+License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Publishes dated parish bulletin PDFs while preserving a natural path toward
@@ -11,7 +11,7 @@ full e-bulletin content.
 
 == Description ==
 
-Parish Bulletins adds Dashboard > Bulletins with a focused publishing workflow:
+Modern Catholic – Parish Bulletins adds Dashboard > Bulletins with a focused publishing workflow:
 
 * Bulletin title
 * Bulletin date
@@ -24,7 +24,8 @@ bulletin has View PDF and Download PDF actions plus an in-page PDF preview on
 larger screens.
 
 The plugin stores bulletins as normal WordPress posts with the
-`parish_bulletin` post type. The date and PDF attachment ID are post metadata;
+`mc_bulletin` post type. Existing `parish_bulletin` records are migrated
+automatically. The date and PDF attachment ID are post metadata;
 e-bulletin content can grow naturally in the existing post content.
 
 == Installation ==
@@ -36,8 +37,8 @@ e-bulletin content can grow naturally in the existing post content.
 
 Themes can override the public templates by adding:
 
-* parish-bulletins/archive-parish_bulletin.php
-* parish-bulletins/single-parish_bulletin.php
+* parish-bulletins/archive-mc_bulletin.php
+* parish-bulletins/single-mc_bulletin.php
 
 == Warranty ==
 
@@ -52,8 +53,11 @@ Third-party components retain their original licenses. See
 
 == Changelog ==
 
+= 1.3.1 =
+* Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
+
 = 1.3.0 =
-* License Parish Bulletins under GPL version 3 or later.
+* License Parish Bulletins under GPL version 3.
 * Add the complete GPLv3 license, an explicit warranty disclaimer, and
   third-party notices for PDF.js and its bundled standard fonts.
 

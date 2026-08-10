@@ -44,7 +44,7 @@ function parish_bulletins_register_post_type() {
 	);
 
 	register_post_type(
-		'parish_bulletin',
+		'mc_bulletin',
 		array(
 			'labels'             => $labels,
 			'public'             => true,
@@ -73,7 +73,7 @@ function parish_bulletins_register_post_type() {
 	);
 
 	register_post_meta(
-		'parish_bulletin',
+		'mc_bulletin',
 		'_parish_bulletin_date',
 		array(
 			'type'              => 'string',
@@ -88,7 +88,7 @@ function parish_bulletins_register_post_type() {
 	);
 
 	register_post_meta(
-		'parish_bulletin',
+		'mc_bulletin',
 		'_parish_bulletin_pdf_id',
 		array(
 			'type'              => 'integer',
@@ -114,7 +114,7 @@ function parish_bulletins_register_post_type() {
  * @return array
  */
 function parish_bulletins_close_saved_discussion( $data, $postarr ) {
-	if ( isset( $data['post_type'] ) && 'parish_bulletin' === $data['post_type'] ) {
+	if ( isset( $data['post_type'] ) && 'mc_bulletin' === $data['post_type'] ) {
 		$data['comment_status'] = 'closed';
 		$data['ping_status']    = 'closed';
 	}
@@ -130,7 +130,7 @@ function parish_bulletins_close_saved_discussion( $data, $postarr ) {
  * @return bool
  */
 function parish_bulletins_discussion_open( $open, $post_id ) {
-	return 'parish_bulletin' === get_post_type( $post_id ) ? false : $open;
+	return 'mc_bulletin' === get_post_type( $post_id ) ? false : $open;
 }
 
 /**
@@ -141,7 +141,7 @@ function parish_bulletins_discussion_open( $open, $post_id ) {
  * @return WP_Comment[]
  */
 function parish_bulletins_hide_comments( $comments, $post_id ) {
-	return 'parish_bulletin' === get_post_type( $post_id ) ? array() : $comments;
+	return 'mc_bulletin' === get_post_type( $post_id ) ? array() : $comments;
 }
 
 /**
@@ -185,7 +185,7 @@ function parish_bulletins_get_title_from_date( $value ) {
  * @param int $post_id Bulletin post ID.
  */
 function parish_bulletins_sync_title( $post_id ) {
-	if ( wp_is_post_revision( $post_id ) || 'parish_bulletin' !== get_post_type( $post_id ) ) {
+	if ( wp_is_post_revision( $post_id ) || 'mc_bulletin' !== get_post_type( $post_id ) ) {
 		return;
 	}
 
@@ -342,6 +342,6 @@ add_filter( 'wp_insert_post_data', 'parish_bulletins_close_saved_discussion', 10
 add_filter( 'comments_open', 'parish_bulletins_discussion_open', 10, 2 );
 add_filter( 'pings_open', 'parish_bulletins_discussion_open', 10, 2 );
 add_filter( 'comments_array', 'parish_bulletins_hide_comments', 10, 2 );
-add_action( 'save_post_parish_bulletin', 'parish_bulletins_sync_title', 30 );
+add_action( 'save_post_mc_bulletin', 'parish_bulletins_sync_title', 30 );
 add_action( 'added_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );
 add_action( 'updated_post_meta', 'parish_bulletins_sync_title_after_date_change', 10, 4 );

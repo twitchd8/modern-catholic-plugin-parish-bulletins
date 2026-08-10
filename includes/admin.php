@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Adds the focused date/PDF workflow to the Bulletin editor.
  */
 function parish_bulletins_add_meta_box() {
-	if ( use_block_editor_for_post_type( 'parish_bulletin' ) ) {
+	if ( use_block_editor_for_post_type( 'mc_bulletin' ) ) {
 		return;
 	}
 
@@ -21,7 +21,7 @@ function parish_bulletins_add_meta_box() {
 		'parish-bulletin-details',
 		__( 'Bulletin Details', 'parish-bulletins' ),
 		'parish_bulletins_render_meta_box',
-		'parish_bulletin',
+		'mc_bulletin',
 		'normal',
 		'high'
 	);
@@ -76,10 +76,10 @@ function parish_bulletins_enqueue_admin_assets( $hook_suffix ) {
 	}
 
 	$screen = get_current_screen();
-	if ( ! $screen || 'parish_bulletin' !== $screen->post_type ) {
+	if ( ! $screen || 'mc_bulletin' !== $screen->post_type ) {
 		return;
 	}
-	if ( use_block_editor_for_post_type( 'parish_bulletin' ) ) {
+	if ( use_block_editor_for_post_type( 'mc_bulletin' ) ) {
 		return;
 	}
 
@@ -115,7 +115,7 @@ function parish_bulletins_enqueue_admin_assets( $hook_suffix ) {
  */
 function parish_bulletins_enqueue_editor_assets() {
 	$screen = get_current_screen();
-	if ( ! $screen || 'parish_bulletin' !== $screen->post_type ) {
+	if ( ! $screen || 'mc_bulletin' !== $screen->post_type ) {
 		return;
 	}
 
@@ -224,7 +224,7 @@ function parish_bulletins_sortable_columns( $columns ) {
  * @param WP_Query $query Current query.
  */
 function parish_bulletins_admin_order( $query ) {
-	if ( ! is_admin() || ! $query->is_main_query() || 'parish_bulletin' !== $query->get( 'post_type' ) ) {
+	if ( ! is_admin() || ! $query->is_main_query() || 'mc_bulletin' !== $query->get( 'post_type' ) ) {
 		return;
 	}
 
@@ -235,11 +235,11 @@ function parish_bulletins_admin_order( $query ) {
 	}
 }
 
-add_action( 'add_meta_boxes_parish_bulletin', 'parish_bulletins_add_meta_box' );
+add_action( 'add_meta_boxes_mc_bulletin', 'parish_bulletins_add_meta_box' );
 add_action( 'admin_enqueue_scripts', 'parish_bulletins_enqueue_admin_assets' );
 add_action( 'enqueue_block_editor_assets', 'parish_bulletins_enqueue_editor_assets' );
-add_action( 'save_post_parish_bulletin', 'parish_bulletins_save_details' );
-add_filter( 'manage_parish_bulletin_posts_columns', 'parish_bulletins_admin_columns' );
-add_action( 'manage_parish_bulletin_posts_custom_column', 'parish_bulletins_admin_column_content', 10, 2 );
-add_filter( 'manage_edit-parish_bulletin_sortable_columns', 'parish_bulletins_sortable_columns' );
+add_action( 'save_post_mc_bulletin', 'parish_bulletins_save_details' );
+add_filter( 'manage_mc_bulletin_posts_columns', 'parish_bulletins_admin_columns' );
+add_action( 'manage_mc_bulletin_posts_custom_column', 'parish_bulletins_admin_column_content', 10, 2 );
+add_filter( 'manage_edit-mc_bulletin_sortable_columns', 'parish_bulletins_sortable_columns' );
 add_action( 'pre_get_posts', 'parish_bulletins_admin_order' );

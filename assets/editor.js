@@ -66,7 +66,7 @@
 		}, [ pdfId ] );
 		const editPost = useDispatch( 'core/editor' ).editPost;
 
-		if ( postType !== 'parish_bulletin' ) {
+		if ( postType !== 'mc_bulletin' ) {
 			return null;
 		}
 
