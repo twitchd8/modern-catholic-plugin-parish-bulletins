@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,13 @@ Modern Catholic – Parish Bulletins adds Dashboard > Bulletins with a focused p
 Published bulletins appear at /bulletins/, newest bulletin date first. Each
 bulletin has View PDF and Download PDF actions plus an in-page PDF preview on
 larger screens.
+
+The plugin keeps all Bulletins by default. Administrators can optionally enter
+a rolling number of months from Bulletins > Settings. When a month limit is
+active, a daily WordPress cron task permanently removes older Bulletin records
+and deletes their PDF attachments and generated previews when those media files
+are not used by other content. Visitors are directed to the parish office for
+earlier Bulletins.
 
 The plugin stores bulletins as normal WordPress posts with the
 `mc_bulletin` post type. Existing `parish_bulletin` records are migrated
@@ -52,6 +59,25 @@ Third-party components retain their original licenses. See
 `THIRD-PARTY-NOTICES.md` and the license files stored with those components.
 
 == Changelog ==
+
+= 1.5.1 =
+* Complete the Modern Catholic branding and renamed plugin repository transition.
+* Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
+* Correct Bulletin Settings screen detection after the post type migration.
+
+= 1.5.0 =
+* Add a Bulletins > Settings screen for the retention policy.
+* Let administrators choose any retention period from 1 to 1200 months.
+* Keep all Bulletins by default, with no automatic deletion enabled.
+* Add a Keep all Bulletins option that disables archive filtering and cleanup.
+* Update public and administrator retention messages to reflect the setting.
+
+= 1.4.0 =
+* Keep a rolling 12 months of Bulletins on the public archive.
+* Run a daily cleanup that permanently removes older Bulletin records and
+  deletes unshared PDF attachments and their generated preview files.
+* Preserve PDF media that is still referenced elsewhere on the site.
+* Direct visitors to the parish office for Bulletins older than 12 months.
 
 = 1.3.1 =
 * Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
