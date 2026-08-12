@@ -61,7 +61,9 @@ Third-party components retain their original licenses. See
 == Changelog ==
 
 = 1.5.1 =
+* Complete the Modern Catholic branding and renamed plugin repository transition.
 * Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
+* Correct Bulletin Settings screen detection after the post type migration.
 
 = 1.5.0 =
 * Add a Bulletins > Settings screen for the retention policy.
@@ -76,6 +78,9 @@ Third-party components retain their original licenses. See
   deletes unshared PDF attachments and their generated preview files.
 * Preserve PDF media that is still referenced elsewhere on the site.
 * Direct visitors to the parish office for Bulletins older than 12 months.
+
+= 1.3.1 =
+* Standardize the post type key as `mc_bulletin` and migrate existing Bulletin posts.
 
 = 1.3.0 =
 * License Parish Bulletins under GPL version 3.
