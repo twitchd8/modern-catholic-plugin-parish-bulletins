@@ -232,7 +232,7 @@ function parish_bulletins_apply_retention() {
  */
 function parish_bulletins_retention_admin_notice() {
 	$screen = get_current_screen();
-	if ( ! $screen || 'mc_bulletin' !== $screen->post_type || 'parish_bulletin_page_parish-bulletins-settings' === $screen->id ) {
+	if ( ! $screen || 'mc_bulletin' !== $screen->post_type || 'mc_bulletin_page_parish-bulletins-settings' === $screen->id ) {
 		return;
 	}
 
