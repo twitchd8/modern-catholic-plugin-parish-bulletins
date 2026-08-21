@@ -1,17 +1,7 @@
-# Parish Bulletins Development Workflow
+# Parish Bulletins Repository Rules
 
-This directory is both the active LocalWP plugin and the single local Git repository for `twitchd8/modern-catholic-plugin-parish-bulletins`.
-
-## Repository Roles
-
-- Develop and test changes in this directory on `dev`.
-- Keep only this local checkout. Do not create a separate stable copy just to hold `main`.
-- Stable releases remain available through the `main` branch, Git tags, and GitHub.
-- Keep `main` stable. Merge tested `dev` work through a reviewed pull request or an explicit release workflow, then tag releases from `main`.
-- Do not add this directory back to the `ats-wp-dev` parent repository or convert it into a submodule.
-
-## Verification
-
-- Run PHP syntax checks on changed PHP files.
-- Verify the active LocalWP output at `http://ats-wp-dev/bulletins/` and relevant single-Bulletin URLs.
-- Confirm `git status -sb` from this directory before committing.
+- Authoritative plugin/version file: `parish-bulletins.php`.
+- Preserve `mc_bulletin` and the legacy `parish_bulletin` migration contract.
+- Preserve the effective Keep All retention default when no option is saved.
+- Run PHP syntax checks only on changed PHP files by default.
+- Treat archive/single-page requests, PDF rendering, migrations, retention state, and cron inspection as smoke tests governed by the inherited approval gate.
