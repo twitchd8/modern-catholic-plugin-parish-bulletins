@@ -50,6 +50,11 @@ The default policy is **Keep all Bulletins**. Administrators may configure a rol
 
 ## Changelog
 
+### 1.5.3
+
+- Adopt Modern Catholic Primary, Surface, Foreground, Muted, Border, and contrast roles throughout public views.
+- Keep PDF viewer chrome intentionally neutral while removing forced theme-color overrides.
+
 ### 1.5.2
 
 - Standardize the GitHub README with Modern Catholic branding, compatibility badges, installation guidance, and GPL-3.0-only licensing.
