@@ -2,7 +2,7 @@
 Contributors: twitchd8
 Requires at least: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,10 @@ Third-party components retain their original licenses. See
 `THIRD-PARTY-NOTICES.md` and the license files stored with those components.
 
 == Changelog ==
+
+= 1.5.3 =
+* Adopt Modern Catholic Primary, Surface, Foreground, Muted, Border, and contrast roles throughout public views.
+* Keep PDF viewer chrome intentionally neutral while removing forced theme-color overrides.
 
 = 1.5.2 =
 * Standardize the GitHub README with Modern Catholic branding, compatibility badges, installation guidance, and GPL-3.0-only licensing.

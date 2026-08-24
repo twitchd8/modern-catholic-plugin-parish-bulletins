@@ -1,9 +1,17 @@
 :root {
-	--parish-bulletins-accent: var(--wp--preset--color--contrast-2, #8b1e2d);
-	--parish-bulletins-ink: var(--wp--preset--color--contrast, #1f2428);
-	--parish-bulletins-paper: var(--wp--preset--color--base, #fffdf8);
-	--parish-bulletins-muted: #656b70;
-	--parish-bulletins-rule: rgba(31, 36, 40, 0.14);
+	--parish-bulletins-accent: var(--mc-color-primary, var(--wp--preset--color--primary, #7a2038));
+	--parish-bulletins-on-accent: var(--mc-color-on-primary, var(--wp--preset--color--on-primary, #fffaf0));
+	--parish-bulletins-ink: var(--mc-color-foreground, var(--wp--preset--color--foreground, #28251f));
+	--parish-bulletins-paper: var(--mc-color-surface, var(--wp--preset--color--surface, #f7f1e2));
+	--parish-bulletins-muted: var(--mc-color-text-muted, var(--wp--preset--color--text-muted, #655f54));
+	--parish-bulletins-rule: var(--mc-color-border, var(--wp--preset--color--border-subtle, #b8aa8e));
+	/* PDF viewer chrome stays neutral, like a document tool rather than parish content. */
+	--parish-bulletins-viewer: #25272a;
+	--parish-bulletins-viewer-strong: #161719;
+	--parish-bulletins-viewer-control: #34373b;
+	--parish-bulletins-viewer-border: #555a60;
+	--parish-bulletins-viewer-text: #ffffff;
+	--parish-bulletins-viewer-muted: #d9dcdf;
 }
 
 .parish-bulletins-shell {
@@ -83,7 +91,7 @@
 .parish-bulletin-card__image,
 .parish-bulletin-card__document {
 	aspect-ratio: 8.5 / 11;
-	background: #f5eee7;
+	background: color-mix(in srgb, var(--parish-bulletins-accent) 8%, var(--parish-bulletins-paper));
 	background: linear-gradient(135deg, color-mix(in srgb, var(--parish-bulletins-accent) 12%, white), var(--parish-bulletins-paper));
 	min-height: 142px;
 	overflow: hidden;
@@ -211,11 +219,11 @@
 
 .parish-bulletin-button--primary {
 	background: var(--parish-bulletins-accent);
-	color: #fff !important;
+	color: var(--parish-bulletins-on-accent);
 }
 
 .parish-bulletin-pdf-viewer {
-	background: #25272a;
+	background: var(--parish-bulletins-viewer);
 	border: 1px solid var(--parish-bulletins-rule);
 	border-radius: 12px;
 	overflow: hidden;
@@ -223,8 +231,8 @@
 
 .parish-bulletin-viewer-toolbar {
 	align-items: center;
-	background: #161719;
-	color: #fff;
+	background: var(--parish-bulletins-viewer-strong);
+	color: var(--parish-bulletins-viewer-text);
 	display: flex;
 	flex-wrap: wrap;
 	font-family: system-ui, sans-serif;
@@ -243,11 +251,11 @@
 
 .parish-bulletin-viewer-toolbar button,
 .parish-bulletin-viewer-toolbar input {
-	background: #34373b;
-	border: 1px solid #555a60;
+	background: var(--parish-bulletins-viewer-control);
+	border: 1px solid var(--parish-bulletins-viewer-border);
 	border-radius: 5px;
 	box-sizing: border-box;
-	color: #fff;
+	color: var(--parish-bulletins-viewer-text);
 	font: inherit;
 	height: 2rem;
 }
@@ -270,7 +278,7 @@
 }
 
 .parish-bulletin-viewer-status {
-	color: #fff;
+	color: var(--parish-bulletins-viewer-text);
 	font-family: system-ui, sans-serif;
 	padding: 2rem;
 	text-align: center;
@@ -290,6 +298,7 @@
 }
 
 .parish-bulletin-viewer-canvas canvas {
+	/* PDF pages use a physical-paper white independent of the site palette. */
 	background: #fff;
 	box-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
 	display: block;
@@ -297,8 +306,8 @@
 }
 
 .parish-bulletin-viewer-fallback {
-	background: #161719;
-	color: #d9dcdf;
+	background: var(--parish-bulletins-viewer-strong);
+	color: var(--parish-bulletins-viewer-muted);
 	font-family: system-ui, sans-serif;
 	font-size: 0.82rem;
 	margin: 0;
@@ -307,7 +316,7 @@
 }
 
 .parish-bulletin-viewer-fallback a {
-	color: #fff;
+	color: var(--parish-bulletins-viewer-text);
 }
 
 .parish-bulletin-content {
